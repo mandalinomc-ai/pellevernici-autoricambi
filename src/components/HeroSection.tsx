@@ -8,9 +8,6 @@ import {
 } from "@/config/site-gallery";
 import { WHATSAPP_DEFAULT_MESSAGE } from "@/config/brand";
 import { whatsappHref } from "@/lib/whatsapp";
-import logoAsset from "@/assets/logo-tricolore.png";
-
-/** URL da bundle (`/_next/static/media/…`): niente `/brand/` (spesso filtrato) niente `/_next/image`. */
 
 export function HeroSection() {
   const [bgSrc, setBgSrc] = useState(() => getHeroBackgroundSrc());
@@ -56,21 +53,9 @@ export function HeroSection() {
           <motion.div
             initial={{ opacity: 0, y: 8 }}
             animate={{ opacity: 1, y: 0 }}
-            className="flex min-w-0 max-w-full flex-wrap items-center gap-x-3 gap-y-2"
+            className="min-w-0 max-w-full"
           >
-            <span className="inline-block shrink-0">
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
-                src={logoAsset.src}
-                alt="P.ELLE Vernici e Ricambi"
-                width={logoAsset.width}
-                height={logoAsset.height}
-                decoding="async"
-                fetchPriority="high"
-                className="block h-12 w-auto max-w-[min(100vw-2rem,200px)] object-contain object-left sm:h-14"
-              />
-            </span>
-            <p className="min-w-0 max-w-full text-xs font-semibold uppercase tracking-[0.35em] text-[#90caf9]">
+            <p className="text-xs font-semibold uppercase tracking-[0.35em] text-[#90caf9]">
               Car Refinish System · Benevento
             </p>
           </motion.div>
