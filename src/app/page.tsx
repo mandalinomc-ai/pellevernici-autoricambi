@@ -11,6 +11,9 @@ import { PdfCatalogSection } from "@/components/PdfCatalogSection";
 import { CartDock } from "@/components/CartDock";
 import { CartProvider } from "@/context/cart-context";
 
+/** Home senza cache ISR lunga: riduce HTML vecchio in CDN (es. dopo rimozione asset). */
+export const revalidate = 0;
+
 export default function Home() {
   return (
     <CartProvider>
