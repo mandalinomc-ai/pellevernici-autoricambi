@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { useEffect, useId, useState } from "react";
+import { WhatsAppGlyph } from "@/components/icons/WhatsAppGlyph";
 import { whatsappHref } from "@/lib/whatsapp";
 
 const INTRO = `Ciao P.ELLE Vernici e Ricambi,
@@ -243,8 +244,9 @@ export function FedeltaWhatsappModal({ open, onClose }: Props) {
             <button
               type="button"
               onClick={submit}
-              className="rounded-full bg-[#25D366] px-5 py-2.5 text-sm font-semibold text-[#042d11] shadow-[0_0_24px_rgba(37,211,102,0.35)] transition hover:bg-[#34eb7a]"
+              className="inline-flex items-center justify-center gap-2 rounded-full bg-[#25D366] px-5 py-2.5 text-sm font-semibold text-[#042d11] shadow-[0_0_24px_rgba(37,211,102,0.35)] transition hover:bg-[#34eb7a]"
             >
+              <WhatsAppGlyph className="h-5 w-5 shrink-0" />
               Invia richiesta su WhatsApp
             </button>
           </div>

@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
+import { WhatsAppGlyph } from "@/components/icons/WhatsAppGlyph";
 import { isBusinessOpen, businessHoursLabel } from "@/lib/business-hours";
 
 function formatNowRome(d: Date): string {
@@ -66,8 +67,9 @@ function OnlinePanel() {
         href="https://wa.me/393471841667"
         target="_blank"
         rel="noopener noreferrer"
-        className="block rounded-xl bg-[#25D366] px-4 py-3 text-center text-sm font-semibold text-white"
+        className="flex items-center justify-center gap-2 rounded-xl bg-[#25D366] px-4 py-3 text-center text-sm font-semibold text-white"
       >
+        <WhatsAppGlyph className="h-5 w-5 shrink-0" />
         Apri WhatsApp con P.ELLE
       </a>
       <a

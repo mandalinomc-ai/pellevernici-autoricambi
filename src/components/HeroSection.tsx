@@ -7,6 +7,7 @@ import {
   HERO_BACKGROUND_REMOTE_FALLBACK,
 } from "@/config/site-gallery";
 import { WHATSAPP_DEFAULT_MESSAGE } from "@/config/brand";
+import { WhatsAppGlyph } from "@/components/icons/WhatsAppGlyph";
 import { whatsappHref } from "@/lib/whatsapp";
 
 export function HeroSection() {
@@ -88,8 +89,9 @@ export function HeroSection() {
             href={whatsappHref(WHATSAPP_DEFAULT_MESSAGE)}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center justify-center rounded-full bg-[#d32f2f] px-8 py-3.5 text-sm font-semibold uppercase tracking-wide text-white shadow-[0_0_40px_rgba(211,47,47,0.45)] transition hover:bg-[#ef5350]"
+            className="inline-flex items-center justify-center gap-2.5 rounded-full bg-[#d32f2f] px-8 py-3.5 text-sm font-semibold uppercase tracking-wide text-white shadow-[0_0_40px_rgba(211,47,47,0.45)] transition hover:bg-[#ef5350]"
           >
+            <WhatsAppGlyph className="h-5 w-5 shrink-0 sm:h-6 sm:w-6" />
             Preventivo rapido su WhatsApp
           </a>
           <a

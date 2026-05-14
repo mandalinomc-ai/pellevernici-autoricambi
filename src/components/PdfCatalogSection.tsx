@@ -4,6 +4,7 @@ import type { PDFDocumentProxy } from "pdfjs-dist";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { useCart } from "@/context/cart-context";
 import { groupPdfTextIntoLines } from "@/lib/pdf-lines";
+import { WhatsAppGlyph } from "@/components/icons/WhatsAppGlyph";
 import { whatsappHref } from "@/lib/whatsapp";
 import { Reveal } from "./Reveal";
 
@@ -197,8 +198,9 @@ export function PdfCatalogSection() {
                         <button
                           type="button"
                           onClick={() => buyOne(line)}
-                          className="rounded-full bg-[#25D366] px-3 py-1.5 text-xs font-semibold text-white hover:brightness-110"
+                          className="inline-flex items-center gap-1.5 rounded-full bg-[#25D366] px-3 py-1.5 text-xs font-semibold text-white hover:brightness-110"
                         >
+                          <WhatsAppGlyph className="h-3.5 w-3.5 shrink-0" />
                           Voglio acquistarlo (WhatsApp)
                         </button>
                       </div>

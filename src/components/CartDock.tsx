@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { WhatsAppGlyph } from "@/components/icons/WhatsAppGlyph";
 import { useCart } from "@/context/cart-context";
 
 export function CartDock() {
@@ -72,8 +73,9 @@ export function CartDock() {
                 href={orderWhatsAppHref}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex-1 rounded-full bg-[#25D366] px-3 py-2 text-center text-xs font-semibold text-white hover:brightness-110"
+                className="inline-flex min-h-[2.25rem] flex-1 items-center justify-center gap-2 rounded-full bg-[#25D366] px-3 py-2 text-center text-xs font-semibold text-white hover:brightness-110"
               >
+                <WhatsAppGlyph className="h-4 w-4 shrink-0" />
                 Invia ordine su WhatsApp
               </a>
             ) : null}

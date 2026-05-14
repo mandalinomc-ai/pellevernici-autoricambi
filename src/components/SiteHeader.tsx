@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { WHATSAPP_DEFAULT_MESSAGE } from "@/config/brand";
+import { WhatsAppGlyph } from "@/components/icons/WhatsAppGlyph";
 import { whatsappHref } from "@/lib/whatsapp";
 
 const nav = [
@@ -38,8 +39,9 @@ export function SiteHeader() {
           href={whatsappHref(WHATSAPP_DEFAULT_MESSAGE)}
           target="_blank"
           rel="noopener noreferrer"
-          className="rounded-full bg-[#d32f2f] px-4 py-2 text-xs font-semibold uppercase tracking-wide text-white shadow-[0_0_24px_rgba(211,47,47,0.35)] transition hover:bg-[#ef5350] sm:text-sm"
+          className="inline-flex items-center gap-2 rounded-full bg-[#d32f2f] px-4 py-2 text-xs font-semibold uppercase tracking-wide text-white shadow-[0_0_24px_rgba(211,47,47,0.35)] transition hover:bg-[#ef5350] sm:text-sm"
         >
+          <WhatsAppGlyph className="h-4 w-4 shrink-0 sm:h-[1.125rem] sm:w-[1.125rem]" />
           Preventivo
         </a>
       </div>
