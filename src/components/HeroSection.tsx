@@ -9,7 +9,10 @@ import {
 } from "@/config/site-gallery";
 import { WHATSAPP_DEFAULT_MESSAGE } from "@/config/brand";
 import { whatsappHref } from "@/lib/whatsapp";
-import logoTricolore from "@/assets/logo-tricolore.png";
+
+/** Intrinseco file `public/brand/logo-tricolore.png` (evita layout shift / overflow con next/image). */
+const LOGO_W = 141;
+const LOGO_H = 67;
 
 export function HeroSection() {
   const [bgSrc, setBgSrc] = useState(() => getHeroBackgroundSrc());
@@ -50,21 +53,25 @@ export function HeroSection() {
         <div className="smoke-layer opacity-28" aria-hidden />
       </div>
 
-      <div className="relative z-10 mx-auto max-w-6xl">
-        <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+      <div className="relative z-10 mx-auto max-w-6xl min-w-0">
+        <div className="flex min-w-0 flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
           <motion.div
             initial={{ opacity: 0, y: 8 }}
             animate={{ opacity: 1, y: 0 }}
-            className="flex items-center gap-3"
+            className="flex min-w-0 max-w-full flex-wrap items-center gap-x-3 gap-y-2"
           >
-            <Image
-              src={logoTricolore}
-              alt="P.ELLE Vernici e Ricambi"
-              priority
-              className="h-12 w-auto object-contain sm:h-14"
-              sizes="(max-width: 640px) 160px, 200px"
-            />
-            <p className="text-xs font-semibold uppercase tracking-[0.35em] text-[#90caf9]">
+            <span className="inline-block shrink-0">
+              <Image
+                src="/brand/logo-tricolore.png"
+                alt="P.ELLE Vernici e Ricambi"
+                width={LOGO_W}
+                height={LOGO_H}
+                priority
+                className="h-12 w-auto max-w-[min(100vw-2rem,200px)] object-contain object-left sm:h-14"
+                sizes="(max-width: 640px) 160px, 200px"
+              />
+            </span>
+            <p className="min-w-0 max-w-full text-xs font-semibold uppercase tracking-[0.35em] text-[#90caf9]">
               Car Refinish System · Benevento
             </p>
           </motion.div>

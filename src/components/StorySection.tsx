@@ -12,7 +12,8 @@ const TV7_ARTICLE_URL =
 export function StorySection() {
   const env =
     typeof process !== "undefined" ? process.env.NEXT_PUBLIC_STORY_VIDEO_URL?.trim() : "";
-  const initial = env && env.length > 0 ? env : "/video/inaugurazione.mp4";
+  const initial =
+    env && env.length > 0 ? env : FALLBACK_VIDEO;
   const [src, setSrc] = useState(initial);
 
   const onVideoError = useCallback(() => {
