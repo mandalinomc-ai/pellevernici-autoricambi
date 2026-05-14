@@ -8,10 +8,9 @@ import {
 } from "@/config/site-gallery";
 import { WHATSAPP_DEFAULT_MESSAGE } from "@/config/brand";
 import { whatsappHref } from "@/lib/whatsapp";
+import logoAsset from "@/assets/logo-tricolore.png";
 
-/** Intrinseco file `public/brand/logo-tricolore.png` (evita layout shift / overflow con next/image). */
-const LOGO_W = 141;
-const LOGO_H = 67;
+/** URL da bundle (`/_next/static/media/…`): niente `/brand/` (spesso filtrato) niente `/_next/image`. */
 
 export function HeroSection() {
   const [bgSrc, setBgSrc] = useState(() => getHeroBackgroundSrc());
@@ -60,13 +59,12 @@ export function HeroSection() {
             className="flex min-w-0 max-w-full flex-wrap items-center gap-x-3 gap-y-2"
           >
             <span className="inline-block shrink-0">
-              {/* Static public asset: avoid next/image `/_next/image` which can 404 behind some proxies. */}
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
-                src="/brand/logo-tricolore.png"
+                src={logoAsset.src}
                 alt="P.ELLE Vernici e Ricambi"
-                width={LOGO_W}
-                height={LOGO_H}
+                width={logoAsset.width}
+                height={logoAsset.height}
                 decoding="async"
                 fetchPriority="high"
                 className="block h-12 w-auto max-w-[min(100vw-2rem,200px)] object-contain object-left sm:h-14"
