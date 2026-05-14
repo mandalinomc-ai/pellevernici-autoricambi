@@ -11,6 +11,14 @@ import { Reveal } from "./Reveal";
 const PDFJS_VERSION = "4.10.38";
 const WORKER_SRC = `https://unpkg.com/pdfjs-dist@${PDFJS_VERSION}/build/pdf.worker.min.mjs`;
 
+/** PDF pubblico: carica `public/catalog/catalogo-pelle.pdf` oppure URL in `NEXT_PUBLIC_CATALOG_PDF_URL`. */
+function catalogPdfUrl(): string {
+  const custom =
+    typeof process !== "undefined" ? process.env.NEXT_PUBLIC_CATALOG_PDF_URL?.trim() : "";
+  if (custom) return custom;
+  return "/catalog/catalogo-pelle.pdf";
+}
+
 async function loadPdfLib() {
   const pdfjs = await import("pdfjs-dist");
   if (typeof window !== "undefined") {
@@ -30,6 +38,8 @@ export function PdfCatalogSection() {
   const [lines, setLines] = useState<string[]>([]);
   const [busy, setBusy] = useState(false);
   const [err, setErr] = useState<string | null>(null);
+  const [catalogReady, setCatalogReady] = useState(false);
+  const [catalogLoading, setCatalogLoading] = useState(true);
 
   const renderPage = useCallback(async (page: number) => {
     const pdf = pdfRef.current;
@@ -65,10 +75,60 @@ export function PdfCatalogSection() {
     }
   }, []);
 
+  const loadPdfFromArrayBuffer = useCallback(async (buf: ArrayBuffer, name: string | null) => {
+    setErr(null);
+    setBusy(true);
+    try {
+      const pdfjs = await loadPdfLib();
+      const pdf = await pdfjs.getDocument({ data: new Uint8Array(buf) }).promise;
+      pdfRef.current = pdf;
+      setNumPages(pdf.numPages);
+      setPageNum(1);
+      setFileName(name);
+      setCatalogReady(true);
+    } catch (e) {
+      console.error(e);
+      setErr("Caricamento PDF non riuscito. File troppo grande o protetto.");
+      pdfRef.current = null;
+      setNumPages(0);
+    } finally {
+      setBusy(false);
+    }
+  }, []);
+
   useEffect(() => {
     if (!numPages || pageNum < 1) return;
     void renderPage(pageNum);
   }, [pageNum, numPages, renderPage]);
+
+  useEffect(() => {
+    let cancelled = false;
+    const url = catalogPdfUrl();
+
+    async function tryLoadHosted() {
+      setCatalogLoading(true);
+      try {
+        const res = await fetch(url, { method: "GET", cache: "no-store" });
+        if (cancelled) return;
+        if (!res.ok) {
+          setCatalogReady(false);
+          return;
+        }
+        const buf = await res.arrayBuffer();
+        if (cancelled) return;
+        await loadPdfFromArrayBuffer(buf, "Catalogo P.ELLE (online)");
+      } catch {
+        if (!cancelled) setCatalogReady(false);
+      } finally {
+        if (!cancelled) setCatalogLoading(false);
+      }
+    }
+
+    void tryLoadHosted();
+    return () => {
+      cancelled = true;
+    };
+  }, [loadPdfFromArrayBuffer]);
 
   const onPickFile = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
@@ -79,19 +139,9 @@ export function PdfCatalogSection() {
     }
     setErr(null);
     setBusy(true);
-    setFileName(file.name);
     try {
       const buf = await file.arrayBuffer();
-      const pdfjs = await loadPdfLib();
-      const pdf = await pdfjs.getDocument({ data: new Uint8Array(buf) }).promise;
-      pdfRef.current = pdf;
-      setNumPages(pdf.numPages);
-      setPageNum(1);
-    } catch (e) {
-      console.error(e);
-      setErr("Caricamento PDF non riuscito. File troppo grande o protetto.");
-      pdfRef.current = null;
-      setNumPages(0);
+      await loadPdfFromArrayBuffer(buf, file.name);
     } finally {
       setBusy(false);
     }
@@ -110,19 +160,28 @@ export function PdfCatalogSection() {
             Catalogo ricambi
           </p>
           <h2 className="mt-3 text-3xl font-semibold tracking-tight text-white sm:text-4xl">
-            Carica il PDF listino: sfoglia, clicca, ordina su WhatsApp.
+            Catalogo PDF: sfoglia i prodotti in vetrina
           </h2>
           <p className="mt-4 max-w-2xl text-zinc-400">
-            Il file resta sul tuo browser: nessun upload al server. Estraiamo il testo per creare
-            voci cliccabili; puoi aggiungere le righe al carrello e inviare l&apos;ordine completo
-            sempre su WhatsApp.
+            Quando il listino è disponibile, lo sfogli qui come in negozio. Il file viene servito dal sito; resta
+            sul tuo browser per l&apos;estrazione testo. Per ordini usa carrello e WhatsApp come sotto.
           </p>
+          {!catalogReady && !catalogLoading ? (
+            <p className="mt-4 rounded-xl border border-amber-500/30 bg-amber-500/10 px-4 py-3 text-sm text-amber-100/90">
+              <strong className="font-semibold">Per il titolare:</strong> copia il PDF del catalogo in{" "}
+              <code className="rounded bg-black/40 px-1.5 py-0.5 text-xs text-amber-50">
+                public/catalog/catalogo-pelle.pdf
+              </code>{" "}
+              (oppure imposta <code className="rounded bg-black/40 px-1.5 py-0.5 text-xs">NEXT_PUBLIC_CATALOG_PDF_URL</code>{" "}
+              nel deploy). Dopo il deploy i clienti vedranno lo stesso listino online.
+            </p>
+          ) : null}
         </Reveal>
 
         <div className="mt-10 flex flex-col gap-8 lg:flex-row">
           <div className="flex-1 space-y-4">
-            <label className="block">
-              <span className="text-sm font-medium text-zinc-200">PDF pezzi e ricambi</span>
+            <label className="block rounded-xl border border-white/10 bg-white/[0.02] p-4">
+              <span className="text-sm font-medium text-zinc-200">Apri un PDF dal tuo dispositivo (opzionale)</span>
               <input
                 type="file"
                 accept="application/pdf"
@@ -130,6 +189,9 @@ export function PdfCatalogSection() {
                 className="mt-2 block w-full cursor-pointer rounded-xl border border-dashed border-white/20 bg-white/5 px-3 py-3 text-sm text-zinc-300 file:mr-3 file:rounded-lg file:border-0 file:bg-[#1565c0] file:px-3 file:py-1.5 file:text-xs file:font-semibold file:text-white"
               />
             </label>
+            {catalogLoading ? (
+              <p className="text-xs text-zinc-500">Caricamento catalogo online…</p>
+            ) : null}
             {fileName ? (
               <p className="text-xs text-zinc-500">
                 File: <span className="text-zinc-300">{fileName}</span> — {numPages} pag.
@@ -174,8 +236,8 @@ export function PdfCatalogSection() {
                   Voci dalla pagina (cliccabili)
                 </h3>
                 <p className="mt-2 text-xs text-zinc-500">
-                  Il PDF non è strutturato come un database: le righe sono ricostruite dal testo.
-                  Verifica sempre in sede disponibilità e codici.
+                  Il PDF non è strutturato come un database: le righe sono ricostruite dal testo. Verifica sempre in
+                  sede disponibilità e codici.
                 </p>
                 <ul className="mt-4 max-h-[min(70vh,520px)] space-y-2 overflow-y-auto pr-1">
                   {lines.length === 0 && !busy && numPages > 0 ? (

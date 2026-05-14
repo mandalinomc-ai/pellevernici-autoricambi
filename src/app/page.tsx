@@ -25,9 +25,9 @@ export default function Home() {
           <ParlanoDiNoiSection />
           <DoveSiamoSection />
           <ServicesSection />
+          <PrioritySection />
           <PdfCatalogSection />
           <ColorSimulator />
-          <PrioritySection />
         </main>
         <SiteFooter />
         <CartDock />

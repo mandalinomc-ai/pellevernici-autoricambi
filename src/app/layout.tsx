@@ -58,7 +58,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="it" className={`${display.variable} ${sans.variable} h-full antialiased`}>
-      <body className="min-h-full bg-[#0d1117] pb-28 font-sans text-zinc-100">
+      <body className="min-h-full bg-[#0d1117] pb-36 font-sans text-zinc-100 sm:pb-40">
         {children}
         <CookieBanner />
         <StickyWhatsapp />
