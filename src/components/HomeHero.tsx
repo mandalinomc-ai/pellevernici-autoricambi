@@ -10,7 +10,8 @@ import { WHATSAPP_DEFAULT_MESSAGE } from "@/config/brand";
 import { WhatsAppGlyph } from "@/components/icons/WhatsAppGlyph";
 import { whatsappHref } from "@/lib/whatsapp";
 
-export function HeroSection() {
+/** Hero home (nessun logo immagine). */
+export function HomeHero() {
   const [bgSrc, setBgSrc] = useState(() => getHeroBackgroundSrc());
 
   const onBgError = useCallback(() => {
@@ -22,6 +23,7 @@ export function HeroSection() {
   return (
     <section
       id="hero"
+      data-hero="v3-no-logo"
       className="relative isolate min-h-[min(78vh,720px)] overflow-hidden border-b border-white/10 px-4 pb-24 pt-16 sm:px-6 sm:pb-28 sm:pt-20"
     >
       <div className="pointer-events-none absolute inset-0 -z-20">

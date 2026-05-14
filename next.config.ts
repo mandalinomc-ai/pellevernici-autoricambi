@@ -11,6 +11,9 @@ const allowedDevOrigins = [
 ];
 
 const nextConfig: NextConfig = {
+  /** Ogni deploy Vercel = nuovo prefisso `/_next/static/`, così i vecchi chunk non restano “appiccicati” al browser. */
+  generateBuildId: async () =>
+    process.env.VERCEL_DEPLOYMENT_ID ?? process.env.VERCEL_GIT_COMMIT_SHA ?? "development",
   allowedDevOrigins,
   async headers() {
     return [

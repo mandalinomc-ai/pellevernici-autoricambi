@@ -1,6 +1,6 @@
 import { SiteHeader } from "@/components/SiteHeader";
 import { SiteFooter } from "@/components/SiteFooter";
-import { HeroSection } from "@/components/HeroSection";
+import { HomeHero } from "@/components/HomeHero";
 import { StorySection } from "@/components/StorySection";
 import { ParlanoDiNoiSection } from "@/components/ParlanoDiNoiSection";
 import { DoveSiamoSection } from "@/components/DoveSiamoSection";
@@ -20,7 +20,7 @@ export default function Home() {
       <div className="flex min-h-full flex-col">
         <SiteHeader />
         <main className="flex-1">
-          <HeroSection />
+          <HomeHero />
           <StorySection />
           <ParlanoDiNoiSection />
           <DoveSiamoSection />
