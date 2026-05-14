@@ -1,7 +1,6 @@
 "use client";
 
 import { motion } from "framer-motion";
-import Image from "next/image";
 import { useCallback, useState } from "react";
 import {
   getHeroBackgroundSrc,
@@ -61,14 +60,16 @@ export function HeroSection() {
             className="flex min-w-0 max-w-full flex-wrap items-center gap-x-3 gap-y-2"
           >
             <span className="inline-block shrink-0">
-              <Image
+              {/* Static public asset: avoid next/image `/_next/image` which can 404 behind some proxies. */}
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
                 src="/brand/logo-tricolore.png"
                 alt="P.ELLE Vernici e Ricambi"
                 width={LOGO_W}
                 height={LOGO_H}
-                priority
-                className="h-12 w-auto max-w-[min(100vw-2rem,200px)] object-contain object-left sm:h-14"
-                sizes="(max-width: 640px) 160px, 200px"
+                decoding="async"
+                fetchPriority="high"
+                className="block h-12 w-auto max-w-[min(100vw-2rem,200px)] object-contain object-left sm:h-14"
               />
             </span>
             <p className="min-w-0 max-w-full text-xs font-semibold uppercase tracking-[0.35em] text-[#90caf9]">
