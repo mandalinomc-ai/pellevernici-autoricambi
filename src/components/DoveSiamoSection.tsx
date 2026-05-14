@@ -1,4 +1,3 @@
-import Image from "next/image";
 import { Reveal } from "./Reveal";
 import {
   ADDRESS_FULL,
@@ -31,13 +30,15 @@ export function DoveSiamoSection() {
         <div className="mt-12 grid gap-10 lg:grid-cols-2 lg:items-start">
           <Reveal className="overflow-hidden rounded-2xl border border-white/10 bg-zinc-900/50 shadow-xl">
             <div className="relative aspect-[4/3] w-full">
-              <Image
+              {/* Static `public/` path: avoid next/image `/_next/image` proxy failures. */}
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
                 src={DOVE_SIAMO_IMAGE}
                 alt="Interno P.ELLE Vernici: banco miscelazione e scaffali professionali"
-                fill
-                className="object-cover brightness-[1.02] contrast-[1.03]"
-                sizes="(max-width:1024px) 100vw, 50vw"
-                priority
+                className="absolute inset-0 h-full w-full object-cover brightness-[1.02] contrast-[1.03]"
+                loading="eager"
+                decoding="async"
+                fetchPriority="high"
               />
               <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-black/20" />
               <p className="absolute bottom-0 left-0 right-0 p-4 text-sm text-zinc-200">
