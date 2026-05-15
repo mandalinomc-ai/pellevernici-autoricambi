@@ -13,6 +13,8 @@ import { CartProvider } from "@/context/cart-context";
 
 /** Home senza cache ISR lunga: riduce HTML vecchio in CDN (es. dopo rimozione asset). */
 export const revalidate = 0;
+/** Evita pagine HTML “congelate” su edge: la home deve sempre riflettere l’ultimo deploy. */
+export const dynamic = "force-dynamic";
 
 export default function Home() {
   return (
