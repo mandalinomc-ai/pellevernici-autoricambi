@@ -33,7 +33,7 @@ export function ServicesSection() {
           <p className="text-xs font-semibold uppercase tracking-[0.35em] text-[#90caf9]">
             Servizi
           </p>
-          <h2 className="mt-3 text-3xl font-semibold tracking-tight text-white sm:text-4xl">
+          <h2 className="mt-3 text-balance text-3xl font-semibold tracking-tight text-white sm:text-4xl">
             Due pilastri: finitura e affidabilità.
           </h2>
           <p className="mt-4 max-w-2xl text-zinc-400">
@@ -50,7 +50,7 @@ export function ServicesSection() {
                 <button
                   type="button"
                   onClick={() => setOpen(expanded ? null : item.id)}
-                  className={`group relative w-full overflow-hidden rounded-2xl border text-left transition ${
+                  className={`touch-manipulation group relative w-full overflow-hidden rounded-2xl border text-left transition active:scale-[0.99] ${
                     expanded
                       ? item.id === "autoricambi"
                         ? "border-[#1565c0]/50 bg-white/[0.06] shadow-[0_0_40px_rgba(21,101,192,0.18)]"

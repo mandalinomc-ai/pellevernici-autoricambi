@@ -17,7 +17,7 @@ export function ColorSimulator() {
           <p className="text-xs font-semibold uppercase tracking-[0.35em]" style={{ color: ACCENT_RED }}>
             Configuratore colore
           </p>
-          <h2 className="mt-3 text-3xl font-semibold tracking-tight text-white sm:text-4xl">
+          <h2 className="mt-3 text-balance text-3xl font-semibold tracking-tight text-white sm:text-4xl">
             Anteprima colore su modello 3D
           </h2>
           <p className="mt-4 max-w-3xl text-zinc-400">
@@ -67,7 +67,7 @@ export function ColorSimulator() {
                 e miscelazione in sede.
               </p>
             </div>
-            <div className="overflow-x-auto">
+            <div className="overflow-x-auto overscroll-x-contain touch-pan-x [-webkit-overflow-scrolling:touch]">
               <table className="w-full min-w-[720px] text-left text-sm">
                 <thead>
                   <tr className="border-b border-white/10 text-[11px] font-semibold uppercase tracking-wide text-zinc-500">

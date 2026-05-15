@@ -32,10 +32,10 @@ export function SiteHeader() {
 
   return (
     <header className="sticky top-0 z-40 border-b border-white/10 bg-[#0d1117]/90 backdrop-blur-md">
-      <div className="mx-auto w-full max-w-6xl px-4 pt-3 sm:px-6">
+      <div className="mx-auto w-full max-w-6xl px-4 pt-[max(0.75rem,env(safe-area-inset-top,0px))] sm:px-6">
         {/* Riga 1: logo + azioni (niente menu sezioni qui → niente sovrapposizioni) */}
         <div className="flex items-center justify-between gap-3 pb-3">
-          <Link href="/#hero" className="group min-w-0 shrink-0 flex flex-col leading-tight" title="Torna alla home">
+          <Link href="/#hero" className="group min-w-0 shrink-0 touch-manipulation flex flex-col leading-tight active:opacity-90" title="Torna alla home">
             <span className="font-semibold tracking-tight text-white">
               P.ELLE{" "}
               <span className="bg-gradient-to-r from-[#d32f2f] via-white to-[#1565c0] bg-clip-text text-transparent">
@@ -56,7 +56,7 @@ export function SiteHeader() {
                 aria-controls={`${menuId}-panel`}
                 aria-haspopup="menu"
                 onClick={() => setIndiceOpen((o) => !o)}
-                className="inline-flex cursor-pointer items-center gap-1.5 rounded-full border border-white/15 bg-white/5 px-3 py-2 text-[11px] font-semibold uppercase tracking-wide text-zinc-200 transition hover:border-[#1565c0]/50 hover:bg-white/10 sm:text-xs"
+                className="inline-flex min-h-11 cursor-pointer items-center gap-1.5 rounded-full border border-white/15 bg-white/5 px-3 text-[11px] font-semibold uppercase tracking-wide text-zinc-200 transition hover:border-[#1565c0]/50 hover:bg-white/10 sm:min-h-0 sm:px-3 sm:py-2 sm:text-xs"
               >
                 Indice
                 <span
@@ -79,7 +79,7 @@ export function SiteHeader() {
                         <Link
                           href={item.href}
                           role="menuitem"
-                          className="block px-4 py-2.5 text-sm text-zinc-200 transition hover:bg-white/10 hover:text-white"
+                          className="block min-h-11 px-4 py-3 text-sm leading-snug text-zinc-200 transition hover:bg-white/10 hover:text-white active:bg-white/10"
                           onClick={() => setIndiceOpen(false)}
                         >
                           {item.label}
@@ -95,7 +95,7 @@ export function SiteHeader() {
               href={whatsappHref(WHATSAPP_DEFAULT_MESSAGE)}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex shrink-0 items-center gap-2 rounded-full bg-[#d32f2f] px-3 py-2 text-[10px] font-semibold uppercase tracking-wide text-white shadow-[0_0_24px_rgba(211,47,47,0.35)] transition hover:bg-[#ef5350] sm:gap-2.5 sm:px-4 sm:text-xs"
+              className="inline-flex min-h-11 shrink-0 items-center gap-2 rounded-full bg-[#d32f2f] px-3 py-2 text-[10px] font-semibold uppercase tracking-wide text-white shadow-[0_0_24px_rgba(211,47,47,0.35)] transition active:scale-[0.98] hover:bg-[#ef5350] sm:gap-2.5 sm:px-4 sm:text-xs"
             >
               <WhatsAppGlyph className="h-4 w-4 shrink-0 sm:h-[1.125rem] sm:w-[1.125rem]" />
               <span className="max-w-[7.5rem] leading-tight sm:max-w-none">Contattaci ora</span>
@@ -105,14 +105,14 @@ export function SiteHeader() {
 
         {/* Riga 2: menu sezioni (tutta la larghezza, scroll orizzontale se serve) */}
         <nav
-          className="-mx-4 flex gap-x-2 gap-y-2 overflow-x-auto overflow-y-hidden border-t border-white/10 px-4 py-3 [scrollbar-width:thin] sm:-mx-6 sm:px-6 md:justify-center"
+          className="-mx-4 flex touch-pan-x gap-x-2 gap-y-2 overflow-x-auto overflow-y-hidden overscroll-x-contain border-t border-white/10 px-4 py-3 [scrollbar-width:thin] sm:-mx-6 sm:px-6 md:justify-center"
           aria-label="Sezioni principali"
         >
           {HOME_SECTION_NAV.map((item) => (
             <Link
               key={item.href}
               href={item.href}
-              className="shrink-0 rounded-full px-3 py-1.5 text-[11px] font-medium text-zinc-300 transition hover:bg-white/10 hover:text-white sm:text-xs lg:px-3.5"
+              className="inline-flex min-h-11 shrink-0 items-center rounded-full px-3.5 py-2 text-[11px] font-medium text-zinc-300 transition hover:bg-white/10 hover:text-white active:bg-white/15 sm:min-h-0 sm:text-xs lg:px-3.5"
             >
               {item.label}
             </Link>

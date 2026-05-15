@@ -11,7 +11,7 @@ export function CartDock() {
   if (items.length === 0) return null;
 
   return (
-    <div className="fixed bottom-24 right-5 z-[58] flex max-w-[min(100vw-2rem,22rem)] flex-col items-end gap-2 sm:bottom-28 sm:right-8">
+    <div className="fixed bottom-[calc(6.5rem+env(safe-area-inset-bottom,0px))] right-[max(1.25rem,env(safe-area-inset-right,0px))] z-[58] flex max-w-[min(100vw-2rem,22rem)] flex-col items-end gap-2 sm:bottom-[calc(7.5rem+env(safe-area-inset-bottom,0px))] sm:right-8">
       {open ? (
         <div className="w-full overflow-hidden rounded-2xl border border-white/10 bg-[#0b0f18]/98 shadow-2xl backdrop-blur-xl">
           <div className="flex items-center justify-between border-b border-white/10 px-4 py-3">
@@ -85,7 +85,7 @@ export function CartDock() {
       <button
         type="button"
         onClick={() => setOpen((o) => !o)}
-        className="rounded-full border border-[#d32f2f]/40 bg-[#0d1117]/95 px-4 py-2 text-xs font-semibold uppercase tracking-wide text-white shadow-[0_0_24px_rgba(211,47,47,0.25)] backdrop-blur"
+        className="min-h-11 touch-manipulation rounded-full border border-[#d32f2f]/40 bg-[#0d1117]/95 px-4 py-2.5 text-xs font-semibold uppercase tracking-wide text-white shadow-[0_0_24px_rgba(211,47,47,0.25)] backdrop-blur"
         aria-expanded={open}
       >
         Carrello ({count})

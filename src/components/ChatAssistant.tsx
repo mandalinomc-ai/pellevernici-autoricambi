@@ -28,7 +28,7 @@ export function ChatAssistant() {
       <button
         type="button"
         onClick={() => setOpen((v) => !v)}
-        className="fixed bottom-5 left-5 z-[60] flex h-14 w-14 items-center justify-center rounded-full border border-white/15 bg-[#161b22]/95 text-xl text-white shadow-[0_8px_30px_rgba(0,0,0,0.45)] backdrop-blur transition hover:border-[#1565c0]/50 sm:bottom-8 sm:left-8 sm:h-16 sm:w-16"
+        className="fixed bottom-[max(1.25rem,env(safe-area-inset-bottom,0px))] left-[max(1.25rem,env(safe-area-inset-left,0px))] z-[60] flex h-14 w-14 touch-manipulation items-center justify-center rounded-full border border-white/15 bg-[#161b22]/95 text-xl text-white shadow-[0_8px_30px_rgba(0,0,0,0.45)] backdrop-blur transition active:scale-95 hover:border-[#1565c0]/50 sm:bottom-8 sm:left-8 sm:h-16 sm:w-16"
         aria-expanded={open}
         aria-controls="pelle-chat-panel"
         aria-label="Apri assistente P.ELLE"
@@ -39,7 +39,7 @@ export function ChatAssistant() {
       {open && (
         <div
           id="pelle-chat-panel"
-          className="fixed bottom-[5.5rem] left-4 z-[59] w-[min(100vw-2rem,380px)] overflow-hidden rounded-2xl border border-white/10 bg-[#161b22]/98 shadow-2xl shadow-black/60 backdrop-blur-xl sm:left-8"
+          className="fixed bottom-[calc(5.5rem+env(safe-area-inset-bottom,0px))] left-[max(1rem,env(safe-area-inset-left,0px))] z-[59] w-[min(100vw-2rem,380px)] overflow-hidden rounded-2xl border border-white/10 bg-[#161b22]/98 shadow-2xl shadow-black/60 backdrop-blur-xl sm:left-8"
         >
           <div className="border-b border-white/10 bg-gradient-to-r from-[#d32f2f]/20 to-[#1565c0]/20 px-4 py-3">
             <p className="text-sm font-semibold text-white">Assistente P.ELLE</p>

@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { DM_Sans, Syne } from "next/font/google";
 import "./globals.css";
 import { CookieBanner } from "@/components/CookieBanner";
@@ -51,6 +51,13 @@ export const metadata: Metadata = {
   robots: { index: true, follow: true },
 };
 
+export const viewport: Viewport = {
+  themeColor: "#0d1117",
+  width: "device-width",
+  initialScale: 1,
+  viewportFit: "cover",
+};
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -58,7 +65,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="it" className={`${display.variable} ${sans.variable} h-full antialiased`}>
-      <body className="min-h-full bg-[#0d1117] pb-36 font-sans text-zinc-100 sm:pb-40">
+      <body className="min-h-full bg-[#0d1117] pb-[calc(9rem+env(safe-area-inset-bottom,0px))] font-sans text-zinc-100 sm:pb-[calc(10rem+env(safe-area-inset-bottom,0px))]">
         {children}
         <CookieBanner />
         <StickyWhatsapp />

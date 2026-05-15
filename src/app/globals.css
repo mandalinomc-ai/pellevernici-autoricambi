@@ -14,6 +14,9 @@ html {
   background-color: #0d1117;
   color: #f4f4f5;
   color-scheme: dark;
+  /* iOS Safari: evita zoom indesiderato su cambio orientamento / reflow */
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
 }
 
 body {
@@ -21,6 +24,8 @@ body {
   min-height: 100vh;
   background-color: #0d1117;
   color: #f4f4f5;
+  /* Evita scroll orizzontale da blur/scale o tabelle overflow */
+  overflow-x: clip;
 }
 
 a {

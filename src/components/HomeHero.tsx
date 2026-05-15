@@ -32,7 +32,7 @@ export function HomeHero() {
           src={bgSrc}
           alt="Interno del punto vendita P.ELLE Vernici a Benevento"
           onError={onBgError}
-          className="h-full w-full scale-[1.03] object-cover object-center"
+          className="h-full w-full max-sm:scale-100 scale-[1.03] object-cover object-center"
           fetchPriority="high"
         />
       </div>
@@ -68,7 +68,7 @@ export function HomeHero() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.06 }}
-          className="font-display mt-6 max-w-5xl text-3xl font-semibold leading-[1.12] tracking-tight text-white drop-shadow-[0_2px_28px_rgba(0,0,0,0.5)] sm:text-4xl lg:text-5xl"
+          className="font-display mt-6 max-w-5xl text-balance text-3xl font-semibold leading-[1.12] tracking-tight text-white drop-shadow-[0_2px_28px_rgba(0,0,0,0.5)] sm:text-4xl lg:text-5xl"
         >
           P.ELLE Vernici e Autoricambi: Il Colore Perfetto per la tua Passione.
         </motion.h1>
@@ -91,14 +91,14 @@ export function HomeHero() {
             href={whatsappHref(WHATSAPP_DEFAULT_MESSAGE)}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center justify-center gap-2.5 rounded-full bg-[#d32f2f] px-8 py-3.5 text-sm font-semibold uppercase tracking-wide text-white shadow-[0_0_40px_rgba(211,47,47,0.45)] transition hover:bg-[#ef5350]"
+            className="inline-flex min-h-12 touch-manipulation items-center justify-center gap-2.5 rounded-full bg-[#d32f2f] px-8 py-3.5 text-sm font-semibold uppercase tracking-wide text-white shadow-[0_0_40px_rgba(211,47,47,0.45)] transition active:scale-[0.99] hover:bg-[#ef5350]"
           >
             <WhatsAppGlyph className="h-5 w-5 shrink-0 sm:h-6 sm:w-6" />
-            Contattaci ora — preventivo WhatsApp
+            Preventivo rapido su WhatsApp
           </a>
           <a
             href="#simulatore"
-            className="inline-flex items-center justify-center rounded-full border border-white/20 bg-black/30 px-8 py-3.5 text-sm font-medium text-white backdrop-blur-sm transition hover:border-[#1565c0]/60 hover:bg-white/10"
+            className="inline-flex min-h-12 touch-manipulation items-center justify-center rounded-full border border-white/20 bg-black/30 px-8 py-3.5 text-sm font-medium text-white backdrop-blur-sm transition active:scale-[0.99] hover:border-[#1565c0]/60 hover:bg-white/10"
           >
             Configuratore colore
           </a>

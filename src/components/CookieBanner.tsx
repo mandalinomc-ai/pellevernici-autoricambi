@@ -30,7 +30,7 @@ export function CookieBanner() {
   if (!visible) return null;
 
   return (
-    <div className="fixed inset-x-0 bottom-0 z-[55] border-t border-white/10 bg-[#161b22]/95 px-4 py-4 shadow-[0_-20px_60px_rgba(0,0,0,0.5)] backdrop-blur sm:px-6">
+    <div className="fixed inset-x-0 bottom-0 z-[55] border-t border-white/10 bg-[#161b22]/95 px-4 pb-[max(1rem,env(safe-area-inset-bottom,0px))] pt-4 shadow-[0_-20px_60px_rgba(0,0,0,0.5)] backdrop-blur sm:px-6">
       <div className="mx-auto flex max-w-6xl flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
         <p className="text-xs leading-relaxed text-zinc-400 sm:text-sm">
           Utilizziamo cookie e strumenti affini necessari al funzionamento del sito. Per maggiori
@@ -47,14 +47,14 @@ export function CookieBanner() {
         <div className="flex shrink-0 gap-2">
           <Link
             href="/cookie-policy#impostazioni-cookie"
-            className="rounded-full border border-white/15 px-4 py-2 text-xs font-medium text-zinc-300 hover:bg-white/5"
+            className="inline-flex min-h-11 touch-manipulation items-center justify-center rounded-full border border-white/15 px-4 text-xs font-medium text-zinc-300 hover:bg-white/5"
           >
             Impostazioni cookie
           </Link>
           <button
             type="button"
             onClick={accept}
-            className="rounded-full bg-[#d32f2f] px-5 py-2 text-xs font-semibold text-white hover:bg-[#ef5350]"
+            className="inline-flex min-h-11 touch-manipulation items-center justify-center rounded-full bg-[#d32f2f] px-5 text-xs font-semibold text-white hover:bg-[#ef5350]"
           >
             Accetta necessari
           </button>

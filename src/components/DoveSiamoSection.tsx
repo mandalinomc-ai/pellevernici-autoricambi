@@ -18,7 +18,7 @@ export function DoveSiamoSection() {
           <p className="text-xs font-semibold uppercase tracking-[0.35em] text-[#90caf9]">
             Dove siamo
           </p>
-          <h2 className="font-display mt-3 text-3xl font-semibold tracking-tight text-white sm:text-4xl">
+          <h2 className="font-display mt-3 text-balance text-3xl font-semibold tracking-tight text-white sm:text-4xl">
             {PAYOFF_LINE}
           </h2>
           <p className="mt-3 max-w-2xl text-lg text-zinc-400">
@@ -68,7 +68,7 @@ export function DoveSiamoSection() {
                   href={getMapsDirectionsHref()}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex flex-1 items-center justify-center rounded-full bg-[#d32f2f] px-5 py-3 text-center text-sm font-semibold text-white shadow-[0_0_28px_rgba(211,47,47,0.35)] transition hover:bg-[#ef5350]"
+                  className="inline-flex min-h-12 flex-1 touch-manipulation items-center justify-center rounded-full bg-[#d32f2f] px-5 py-3 text-center text-sm font-semibold text-white shadow-[0_0_28px_rgba(211,47,47,0.35)] transition active:scale-[0.99] hover:bg-[#ef5350]"
                 >
                   Indicazioni da qui (Google Maps)
                 </a>
@@ -76,7 +76,7 @@ export function DoveSiamoSection() {
                   href={getMapsPlaceHref()}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex flex-1 items-center justify-center rounded-full border border-white/15 bg-white/5 px-5 py-3 text-center text-sm font-medium text-white hover:bg-white/10"
+                  className="inline-flex min-h-12 flex-1 touch-manipulation items-center justify-center rounded-full border border-white/15 bg-white/5 px-5 py-3 text-center text-sm font-medium text-white active:scale-[0.99] hover:bg-white/10"
                 >
                   Apri scheda luogo
                 </a>

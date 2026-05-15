@@ -27,8 +27,8 @@ export default function Home() {
           <ParlanoDiNoiSection />
           <DoveSiamoSection />
           <ServicesSection />
-          <PdfCatalogSection />
           <ColorSimulator />
+          <PdfCatalogSection />
           <PrioritySection />
         </main>
         <SiteFooter />
