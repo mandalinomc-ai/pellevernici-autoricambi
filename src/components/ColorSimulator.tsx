@@ -34,14 +34,16 @@ export function ColorSimulator() {
 
         <Reveal delay={0.04}>
           <figure className="mt-10 overflow-hidden rounded-2xl border border-white/10 bg-zinc-950">
-            <div className="relative aspect-[16/10] w-full max-h-[min(70vh,520px)]">
+            <div className="flex justify-center bg-black/40 px-3 py-6 sm:px-6 sm:py-8">
               <Image
                 src="/gallery/ventagli-tinte-riferimento.png"
                 alt="Ventagli professionali da colorificio: scale di colori Car Refinish con campioni e codici su chip"
-                fill
-                className="object-cover object-center"
-                sizes="(max-width: 768px) 100vw, 1152px"
+                width={540}
+                height={960}
+                sizes="(max-width: 640px) min(88vw, 260px), 300px"
+                className="h-auto max-h-[min(52vh,420px)] w-auto max-w-[min(88vw,300px)] object-contain"
                 priority={false}
+                unoptimized
               />
             </div>
             <figcaption className="border-t border-white/10 px-4 py-3 text-xs text-zinc-500 sm:px-6">
