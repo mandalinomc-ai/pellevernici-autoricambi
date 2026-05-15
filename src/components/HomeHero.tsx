@@ -10,7 +10,10 @@ import { WHATSAPP_DEFAULT_MESSAGE } from "@/config/brand";
 import { WhatsAppGlyph } from "@/components/icons/WhatsAppGlyph";
 import { whatsappHref } from "@/lib/whatsapp";
 
-/** Hero home (nessun logo immagine). */
+/**
+ * Hero home — SOLO sfondo negozio + testo.
+ * NON aggiungere logo `<img>` / `next/image` qui (vedi `.cursor/rules/no-hero-logo-image.mdc`).
+ */
 export function HomeHero() {
   const [bgSrc, setBgSrc] = useState(() => getHeroBackgroundSrc());
 
@@ -23,7 +26,7 @@ export function HomeHero() {
   return (
     <section
       id="hero"
-      data-hero="v3-no-logo"
+      data-hero="v4-no-logo-image"
       className="relative isolate min-h-[min(78vh,720px)] overflow-hidden border-b border-white/10 px-4 pb-24 pt-16 sm:px-6 sm:pb-28 sm:pt-20"
     >
       <div className="pointer-events-none absolute inset-0 -z-20">
@@ -53,15 +56,13 @@ export function HomeHero() {
 
       <div className="relative z-10 mx-auto max-w-6xl min-w-0">
         <div className="flex min-w-0 flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
-          <motion.div
+          <motion.p
             initial={{ opacity: 0, y: 8 }}
             animate={{ opacity: 1, y: 0 }}
-            className="min-w-0 max-w-full"
+            className="text-xs font-semibold uppercase tracking-[0.35em] text-[#90caf9]"
           >
-            <p className="text-xs font-semibold uppercase tracking-[0.35em] text-[#90caf9]">
-              Car Refinish System · Benevento
-            </p>
-          </motion.div>
+            Car Refinish System · Benevento
+          </motion.p>
         </div>
 
         <motion.h1

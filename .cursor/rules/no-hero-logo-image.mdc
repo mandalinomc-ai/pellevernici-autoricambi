@@ -1,0 +1,24 @@
+---
+description: Vietato logo immagine nell'hero — bug storico rimosso definitivamente
+alwaysApply: true
+---
+
+# Hero senza logo immagine (vietato reintrodurre)
+
+L'utente ha rimosso **definitivamente** il logo immagine nell'hero (file `logo-tricolore`, `next/image` con alt `P.ELLE Vernici e Ricambi`, componente `HeroSection`, import da `src/assets/logo-tricolore.png` o `public/brand/`).
+
+## Non fare mai (senza richiesta esplicita scritta dell'utente)
+
+- Aggiungere `<img>`, `next/image`, o import di logo nell'hero (`HomeHero.tsx`) o sopra il payoff "Car Refinish System · Benevento".
+- Ricreare `HeroSection.tsx` o ripristinare commit che reintroducono il logo hero.
+- Aggiungere asset `logo-tricolore.png` in `src/assets/` o `public/brand/` per l'hero.
+
+## Implementazione corretta
+
+- Solo `HomeHero.tsx` per l'hero home: sfondo `<img>` del negozio + testo (payoff, h1, CTA). Attributo `data-hero="v4-no-logo-image"`.
+- Branding testuale resta in `SiteHeader` (nessuna immagine logo obbligatoria).
+
+## Dopo modifiche all'hero
+
+- Eseguire `npm run build` e verificare che l'HTML non contenga `logo-tricolore` né `alt="P.ELLE Vernici e Ricambi"` nell'hero.
+- Deploy produzione via **git push** su `master` (CLI Vercel spesso fallisce per TLS su Windows).

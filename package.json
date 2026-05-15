@@ -5,6 +5,8 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
+    "verify:hero": "node scripts/verify-no-hero-logo.mjs",
+    "build:safe": "npm run build && npm run verify:hero",
     "start": "next start",
     "lint": "eslint"
   },
