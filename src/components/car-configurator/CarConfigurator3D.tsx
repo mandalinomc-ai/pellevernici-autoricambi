@@ -43,9 +43,11 @@ export function CarConfigurator3D({ hex, onHexChange }: Props) {
         <div>
           <p className="text-sm font-medium text-zinc-200">Tavolozza colori</p>
           <p className="mt-1 text-xs text-zinc-500">
-            Tocca un campione per impostare il HEX, oppure usa il selettore sotto se non conosci il codice.
+            Campioni = stessi colori dello specchietto ventagli sopra (HEX deduplicati). Tocca un quadrato o usa il
+            selettore sotto.
           </p>
-          <div className="mt-3 grid grid-cols-6 gap-2 sm:grid-cols-8">
+          <div className="mt-3 max-h-[min(40vh,320px)] overflow-y-auto overflow-x-hidden pr-1">
+            <div className="grid grid-cols-6 gap-2 sm:grid-cols-8 lg:grid-cols-10">
             {CAR_PAINT_PRESETS.map((p) => {
               const active = normalizeHex(hex) === normalizeHex(p.hex);
               return (
@@ -62,6 +64,7 @@ export function CarConfigurator3D({ hex, onHexChange }: Props) {
                 />
               );
             })}
+            </div>
           </div>
         </div>
 

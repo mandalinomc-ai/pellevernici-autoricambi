@@ -1,6 +1,5 @@
 "use client";
 
-import Image from "next/image";
 import { useState } from "react";
 import { Reveal } from "./Reveal";
 import { ACCENT_RED } from "@/config/brand";
@@ -34,23 +33,23 @@ export function ColorSimulator() {
 
         <Reveal delay={0.04}>
           <figure className="mt-10 overflow-hidden rounded-2xl border border-white/10 bg-zinc-950">
-            <div className="flex justify-center bg-black/40 px-3 py-6 sm:px-6 sm:py-8">
-              <Image
+            <div className="flex justify-center bg-gradient-to-b from-zinc-950 to-black px-3 py-6 sm:px-6 sm:py-8">
+              {/* Immagine nativa 540×960: niente upscale oltre 540px per evitare sgranatura */}
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
                 src="/gallery/ventagli-tinte-riferimento.png"
                 alt="Ventagli professionali da colorificio: scale di colori Car Refinish con campioni e codici su chip"
                 width={540}
                 height={960}
-                sizes="(max-width: 640px) min(88vw, 260px), 300px"
-                className="h-auto max-h-[min(52vh,420px)] w-auto max-w-[min(88vw,300px)] object-contain"
-                priority={false}
-                unoptimized
+                decoding="async"
+                className="h-auto max-h-[min(78vh,720px)] w-auto max-w-[min(100%,540px)] rounded-lg object-contain shadow-[0_20px_60px_rgba(0,0,0,0.55)] ring-1 ring-white/10"
               />
             </div>
             <figcaption className="border-t border-white/10 px-4 py-3 text-xs text-zinc-500 sm:px-6">
-              Esempio di ventagli in cabina: strip metallizzate, pastelli, bianchi selezione e progressioni colore come
-              in un listino vernici auto — i codici sul chip (formato tipo{" "}
-              <span className="font-mono text-zinc-400">61-0xx</span>) sono quelli che in negozio si incrociano con il
-              sistema tintometrico.
+              Foto cabina (540 px di larghezza): mostriamo alla risoluzione originale così non viene stirata sul
+              monitor. Le tinte della tavolozza 3D e della tabella sotto usano gli stessi HEX delle scale dello
+              specchietto. I codici sul chip (formato tipo <span className="font-mono text-zinc-400">61-0xx</span>) in
+              sede si leggono sui ventagli fisici.
             </figcaption>
           </figure>
         </Reveal>
