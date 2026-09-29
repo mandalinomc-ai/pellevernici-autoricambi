@@ -1,9 +1,11 @@
 import type { Metadata, Viewport } from "next";
 import { DM_Sans, Syne } from "next/font/google";
 import "./globals.css";
+import { CartDock } from "@/components/CartDock";
+import { ChatAssistant } from "@/components/ChatAssistant";
 import { CookieBanner } from "@/components/CookieBanner";
 import { StickyWhatsapp } from "@/components/StickyWhatsapp";
-import { ChatAssistant } from "@/components/ChatAssistant";
+import { CartProvider } from "@/context/cart-context";
 
 const display = Syne({
   subsets: ["latin"],
@@ -66,7 +68,10 @@ export default function RootLayout({
   return (
     <html lang="it" className={`${display.variable} ${sans.variable} h-full antialiased`}>
       <body className="min-h-full bg-[#0d1117] pb-[calc(9rem+env(safe-area-inset-bottom,0px))] font-sans text-zinc-100 sm:pb-[calc(10rem+env(safe-area-inset-bottom,0px))]">
-        {children}
+        <CartProvider>
+          {children}
+          <CartDock />
+        </CartProvider>
         <CookieBanner />
         <StickyWhatsapp />
         <ChatAssistant />

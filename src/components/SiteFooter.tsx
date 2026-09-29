@@ -14,6 +14,7 @@ const year = new Date().getFullYear();
 
 function LegalLinksStrip() {
   const items = [
+    { href: "/vetrina", label: "Vetrina" },
     { href: "/#dove-siamo", label: "Dove siamo" },
     { href: "/#parlano-di-noi", label: "Parlano di noi" },
     { href: "/privacy-policy", label: "Privacy Policy" },

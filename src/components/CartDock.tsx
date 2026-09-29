@@ -15,7 +15,7 @@ export function CartDock() {
       {open ? (
         <div className="w-full overflow-hidden rounded-2xl border border-white/10 bg-[#0b0f18]/98 shadow-2xl backdrop-blur-xl">
           <div className="flex items-center justify-between border-b border-white/10 px-4 py-3">
-            <p className="text-sm font-semibold text-white">Carrello ordine</p>
+            <p className="text-sm font-semibold text-white">Lista per il negozio</p>
             <button
               type="button"
               onClick={() => setOpen(false)}
@@ -76,7 +76,7 @@ export function CartDock() {
                 className="inline-flex min-h-[2.25rem] flex-1 items-center justify-center gap-2 rounded-full bg-[#25D366] px-3 py-2 text-center text-xs font-semibold text-white hover:brightness-110"
               >
                 <WhatsAppGlyph className="h-4 w-4 shrink-0" />
-                Invia ordine su WhatsApp
+                Invia lista su WhatsApp
               </a>
             ) : null}
           </div>
@@ -88,7 +88,7 @@ export function CartDock() {
         className="min-h-11 touch-manipulation rounded-full border border-[#d32f2f]/40 bg-[#0d1117]/95 px-4 py-2.5 text-xs font-semibold uppercase tracking-wide text-white shadow-[0_0_24px_rgba(211,47,47,0.25)] backdrop-blur"
         aria-expanded={open}
       >
-        Carrello ({count})
+        Lista ({count})
       </button>
     </div>
   );

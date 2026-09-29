@@ -57,6 +57,15 @@ export function StorySection() {
               "P.ELLE Vernici non è solo un'attività, è il risultato di un sogno nato tra le mura di un piccolo garage. La nostra storia è fatta di mani sporche di colore, anni di sacrifici immensi e una dedizione totale della nostra famiglia verso l'eccellenza. Ogni traguardo raggiunto, fino all'apertura della nostra sede in Via Napoli Parco Appia, è stato costruito un barattolo alla volta, con l'unico obiettivo di offrire ai professionisti e ai privati di Benevento il massimo della qualità."
             }
           </p>
+          <figure className="max-w-sm overflow-hidden rounded-2xl border border-white/15 shadow-2xl">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src="/chi-siamo/negozio.jpg"
+              alt="Team di P.ELLE Vernici in negozio a Benevento"
+              className="h-auto w-full object-cover"
+              loading="lazy"
+            />
+          </figure>
           <p className="text-sm text-zinc-400">
             Servizio e cronaca sull&apos;inaugurazione:{" "}
             <a

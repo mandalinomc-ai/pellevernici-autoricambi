@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useEffect, useMemo, useState } from "react";
 import { WhatsAppGlyph } from "@/components/icons/WhatsAppGlyph";
 import { isBusinessOpen, businessHoursLabel } from "@/lib/business-hours";
@@ -78,6 +79,12 @@ function OnlinePanel() {
       >
         Chiama 347 184 1667
       </a>
+      <Link
+        href="/vetrina"
+        className="block rounded-xl border border-white/15 bg-white/5 px-4 py-3 text-center text-sm font-medium text-white hover:bg-white/10"
+      >
+        Vetrina prodotti (info in sede o WhatsApp)
+      </Link>
     </div>
   );
 }

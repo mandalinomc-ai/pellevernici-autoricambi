@@ -34,7 +34,7 @@ function buildOrderMessage(lines: CartLine[]): string {
     const pg = l.page != null ? ` — catalogo PDF pag. ${l.page}` : "";
     return `${i + 1}. x${l.qty} ${l.label}${pg}`;
   });
-  return `Ciao P.ELLE Vernici e Ricambi,\nvorrei ordinare:\n\n${rows.join("\n")}\n\nGrazie.`;
+  return `Ciao P.ELLE Vernici e Ricambi,\nvorrei informazioni e disponibilità in sede per:\n\n${rows.join("\n")}\n\nNon acquisto dal sito: possiamo organizzare su WhatsApp oppure in negozio.\nGrazie.`;
 }
 
 export function CartProvider({ children }: { children: ReactNode }) {

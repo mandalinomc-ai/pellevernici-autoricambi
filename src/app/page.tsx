@@ -8,8 +8,7 @@ import { ServicesSection } from "@/components/ServicesSection";
 import { ColorSimulator } from "@/components/ColorSimulator";
 import { PrioritySection } from "@/components/PrioritySection";
 import { PdfCatalogSection } from "@/components/PdfCatalogSection";
-import { CartDock } from "@/components/CartDock";
-import { CartProvider } from "@/context/cart-context";
+import { VetrinaTeaser } from "@/components/VetrinaTeaser";
 
 /** Home senza cache ISR lunga: riduce HTML vecchio in CDN (es. dopo rimozione asset). */
 export const revalidate = 0;
@@ -18,22 +17,20 @@ export const dynamic = "force-dynamic";
 
 export default function Home() {
   return (
-    <CartProvider>
-      <div className="flex min-h-full flex-col">
-        <SiteHeader />
-        <main className="flex-1">
-          <HomeHero />
-          <StorySection />
-          <ParlanoDiNoiSection />
-          <DoveSiamoSection />
-          <ServicesSection />
-          <ColorSimulator />
-          <PdfCatalogSection />
-          <PrioritySection />
-        </main>
-        <SiteFooter />
-        <CartDock />
-      </div>
-    </CartProvider>
+    <div className="flex min-h-full flex-col">
+      <SiteHeader />
+      <main className="flex-1">
+        <HomeHero />
+        <StorySection />
+        <ParlanoDiNoiSection />
+        <DoveSiamoSection />
+        <ServicesSection />
+        <VetrinaTeaser />
+        <ColorSimulator />
+        <PdfCatalogSection />
+        <PrioritySection />
+      </main>
+      <SiteFooter />
+    </div>
   );
 }

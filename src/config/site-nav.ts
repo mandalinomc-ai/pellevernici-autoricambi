@@ -4,6 +4,7 @@ export const HOME_SECTION_NAV = [
   { href: "/#chi-siamo", label: "Chi siamo" },
   { href: "/#parlano-di-noi", label: "Parlano di noi" },
   { href: "/#dove-siamo", label: "Dove siamo" },
+  { href: "/vetrina", label: "Vetrina" },
   { href: "/#servizi", label: "Servizi" },
   { href: "/#simulatore", label: "Simulatore colore" },
   { href: "/#pelle-priority", label: "P.ELLE Priority" },

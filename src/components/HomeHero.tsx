@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
+import Link from "next/link";
 import { useCallback, useState } from "react";
 import {
   getHeroBackgroundSrc,
@@ -97,9 +98,15 @@ export function HomeHero() {
             <WhatsAppGlyph className="h-5 w-5 shrink-0 sm:h-6 sm:w-6" />
             Preventivo rapido su WhatsApp
           </a>
+          <Link
+            href="/vetrina"
+            className="inline-flex min-h-12 touch-manipulation items-center justify-center rounded-full border border-white/20 bg-black/30 px-8 py-3.5 text-sm font-medium text-white backdrop-blur-sm transition active:scale-[0.99] hover:border-[#1565c0]/60 hover:bg-white/10"
+          >
+            Vetrina prodotti
+          </Link>
           <a
             href="#simulatore"
-            className="inline-flex min-h-12 touch-manipulation items-center justify-center rounded-full border border-white/20 bg-black/30 px-8 py-3.5 text-sm font-medium text-white backdrop-blur-sm transition active:scale-[0.99] hover:border-[#1565c0]/60 hover:bg-white/10"
+            className="inline-flex min-h-12 touch-manipulation items-center justify-center rounded-full border border-white/20 bg-black/30 px-8 py-3.5 text-sm font-medium text-white backdrop-blur-sm transition active:scale-[0.99] hover:border-white/40 hover:bg-white/10"
           >
             Configuratore colore
           </a>
