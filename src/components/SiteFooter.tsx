@@ -132,7 +132,12 @@ export function SiteFooter() {
           <p>
             <span className="text-zinc-400">P.IVA:</span> {VAT_NUMBER}
           </p>
-          <p>© {year} P.ELLE — Tutti i diritti riservati.</p>
+          <p>
+            © {year} P.ELLE — Tutti i diritti riservati.{" "}
+            <Link href="/gestione" className="text-zinc-600 hover:text-zinc-300">
+              Gestione
+            </Link>
+          </p>
         </div>
       </div>
     </footer>

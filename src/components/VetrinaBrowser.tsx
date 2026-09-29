@@ -2,18 +2,13 @@
 
 import { useEffect, useMemo, useState } from "react";
 import { WhatsAppGlyph } from "@/components/icons/WhatsAppGlyph";
-import {
-  VETRINA_PRODUCTS,
-  vetrinaLabel,
-  vetrinaWhatsappText,
-  type VetrinaProduct,
-} from "@/config/vetrina";
+import { vetrinaLabel, vetrinaWhatsappText, type VetrinaProduct } from "@/lib/vetrina-product";
 import { useCart } from "@/context/cart-context";
 import { whatsappHref } from "@/lib/whatsapp";
 
 const PAGE = 24;
 
-export function VetrinaBrowser() {
+export function VetrinaBrowser({ products }: { products: VetrinaProduct[] }) {
   const { add } = useCart();
   const [query, setQuery] = useState("");
   const [visible, setVisible] = useState(PAGE);
@@ -22,10 +17,15 @@ export function VetrinaBrowser() {
   const [added, setAdded] = useState<string | null>(null);
 
   const filtered = useMemo(() => {
-    const q = query.replace(/\D/g, "");
-    if (!q) return VETRINA_PRODUCTS;
-    return VETRINA_PRODUCTS.filter((p) => p.code.includes(q));
-  }, [query]);
+    const q = query.trim().toLowerCase();
+    if (!q) return products;
+    return products.filter((product) =>
+      [product.name, product.code, product.info, product.price, vetrinaLabel(product)]
+        .join(" ")
+        .toLowerCase()
+        .includes(q),
+    );
+  }, [products, query]);
 
   const shown = filtered.slice(0, visible);
 
@@ -50,7 +50,10 @@ export function VetrinaBrowser() {
   };
 
   const addProduct = (product: VetrinaProduct) => {
-    add(`${vetrinaLabel(product.code)} (vetrina)`);
+    const label = product.code.trim()
+      ? `${vetrinaLabel(product)} (art. ${product.code.trim()})`
+      : vetrinaLabel(product);
+    add(`${label} (vetrina)`);
     setAdded(product.id);
   };
 
@@ -59,7 +62,7 @@ export function VetrinaBrowser() {
       <div className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
         <label className="block min-w-0 flex-1">
           <span className="text-xs font-semibold uppercase tracking-[0.2em] text-zinc-400">
-            Cerca per numero articolo
+            Cerca per nome o codice
           </span>
           <input
             value={query}
@@ -67,8 +70,7 @@ export function VetrinaBrowser() {
               setQuery(e.target.value);
               setVisible(PAGE);
             }}
-            inputMode="numeric"
-            placeholder="Es. 12, 150, 250"
+            placeholder="Es. stucco, primer, 150"
             className="mt-2 w-full rounded-2xl border border-white/15 bg-black/30 px-4 py-3 text-base text-white outline-none placeholder:text-zinc-500 focus:border-[#1565c0]"
           />
         </label>
@@ -79,8 +81,8 @@ export function VetrinaBrowser() {
 
       {shown.length === 0 ? (
         <p className="mt-10 rounded-2xl border border-white/10 bg-white/[0.03] px-5 py-8 text-zinc-300">
-          Nessun articolo con questo numero. Prova solo le cifre della foto, oppure scrivi al
-          negozio su WhatsApp.
+          Nessun articolo corrisponde alla ricerca. Scrivi al negozio su WhatsApp e descrivi cosa
+          ti serve.
         </p>
       ) : (
         <ul className="mt-8 grid grid-cols-2 gap-3 sm:gap-4 lg:grid-cols-4">
@@ -91,19 +93,13 @@ export function VetrinaBrowser() {
                 onClick={() => open(product)}
                 className="group flex h-full w-full flex-col overflow-hidden rounded-2xl border border-white/10 bg-white/[0.03] text-left transition hover:border-[#1565c0]/50"
               >
-                <span className="flex aspect-square items-center justify-center bg-white">
-                  {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img
-                    src={product.images[0]}
-                    alt={`${vetrinaLabel(product.code)}, prodotto in vetrina P.ELLE`}
-                    loading="lazy"
-                    decoding="async"
-                    className="h-full w-full object-contain p-2"
-                  />
-                </span>
+                <ProductPhoto src={product.images[0]} alt={`${vetrinaLabel(product)} in vetrina`} />
                 <span className="flex flex-1 flex-col gap-1 px-3 py-3">
-                  <span className="text-sm font-semibold text-white">{vetrinaLabel(product.code)}</span>
-                  <span className="text-[11px] uppercase tracking-wide text-[#90caf9]">
+                  <span className="text-sm font-semibold text-white">{vetrinaLabel(product)}</span>
+                  {product.price ? (
+                    <span className="text-sm text-[#90caf9]">{product.price}</span>
+                  ) : null}
+                  <span className="text-[11px] uppercase tracking-wide text-zinc-500">
                     Solo in sede
                     {product.images.length > 1 ? ` · ${product.images.length} foto` : ""}
                   </span>
@@ -148,11 +144,10 @@ export function VetrinaBrowser() {
             </button>
             <div className="grid min-h-0 flex-1 gap-0 overflow-y-auto md:grid-cols-[minmax(0,1.1fr)_minmax(0,0.9fr)]">
               <div className="relative bg-white">
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img
+                <ProductPhoto
                   src={active.images[photo] ?? active.images[0]}
-                  alt={`${vetrinaLabel(active.code)}, foto ${photo + 1}`}
-                  className="aspect-square w-full object-contain"
+                  alt={`${vetrinaLabel(active)}, foto ${photo + 1}`}
+                  eager
                 />
                 {active.images.length > 1 ? (
                   <div className="absolute bottom-3 left-0 right-0 flex justify-center gap-2">
@@ -174,13 +169,24 @@ export function VetrinaBrowser() {
                     Vetrina
                   </p>
                   <h2 id="vetrina-dialog-title" className="mt-1 text-2xl font-semibold text-white">
-                    {vetrinaLabel(active.code)}
+                    {vetrinaLabel(active)}
                   </h2>
+                  {active.code ? (
+                    <p className="mt-1 text-xs uppercase tracking-wide text-zinc-500">
+                      Codice {active.code}
+                    </p>
+                  ) : null}
+                  {active.price ? (
+                    <p className="mt-3 text-lg font-semibold text-white">{active.price}</p>
+                  ) : null}
                 </div>
-                <p className="text-sm leading-relaxed text-zinc-300">
-                  Questo articolo non si compra sul sito. Per prezzo, disponibilità e ritiro passa in
-                  sede in Via Napoli Parco Appia 236, Benevento, oppure organizza tutto su WhatsApp
-                  citando il numero articolo.
+                {active.info ? (
+                  <p className="whitespace-pre-wrap text-sm leading-relaxed text-zinc-200">{active.info}</p>
+                ) : null}
+                <p className="text-sm leading-relaxed text-zinc-400">
+                  Questo articolo non si compra sul sito. Per disponibilità e ritiro passa in sede
+                  in Via Napoli Parco Appia 236, Benevento, oppure organizza tutto su WhatsApp.
+                  {active.price ? " Il prezzo indicato è di riferimento." : ""}
                 </p>
                 {active.images.length > 1 ? (
                   <div className="flex gap-2">
@@ -201,7 +207,7 @@ export function VetrinaBrowser() {
                 ) : null}
                 <div className="mt-auto flex flex-col gap-2">
                   <a
-                    href={whatsappHref(vetrinaWhatsappText(active.code))}
+                    href={whatsappHref(vetrinaWhatsappText(active))}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="inline-flex min-h-11 items-center justify-center gap-2 rounded-full bg-[#25D366] px-4 py-3 text-sm font-semibold text-white hover:brightness-110"
@@ -223,5 +229,27 @@ export function VetrinaBrowser() {
         </div>
       ) : null}
     </div>
+  );
+}
+
+function ProductPhoto({ src, alt, eager = false }: { src?: string; alt: string; eager?: boolean }) {
+  if (!src) {
+    return (
+      <span className="flex aspect-square items-center justify-center bg-zinc-100 px-3 text-center text-xs text-zinc-500">
+        Senza foto
+      </span>
+    );
+  }
+  return (
+    <span className="flex aspect-square items-center justify-center bg-white">
+      {/* eslint-disable-next-line @next/next/no-img-element */}
+      <img
+        src={src}
+        alt={alt}
+        loading={eager ? "eager" : "lazy"}
+        decoding="async"
+        className="h-full w-full object-contain p-2"
+      />
+    </span>
   );
 }

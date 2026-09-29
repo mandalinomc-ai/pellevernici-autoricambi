@@ -2,7 +2,9 @@ import type { Metadata } from "next";
 import { SiteFooter } from "@/components/SiteFooter";
 import { SiteHeader } from "@/components/SiteHeader";
 import { VetrinaBrowser } from "@/components/VetrinaBrowser";
-import { VETRINA_PRODUCTS } from "@/config/vetrina";
+import { listPublicProducts } from "@/lib/vetrina-store";
+
+export const dynamic = "force-dynamic";
 
 export const metadata: Metadata = {
   title: "Vetrina prodotti",
@@ -11,7 +13,9 @@ export const metadata: Metadata = {
   alternates: { canonical: "/vetrina" },
 };
 
-export default function VetrinaPage() {
+export default async function VetrinaPage() {
+  const products = await listPublicProducts();
+
   return (
     <div className="flex min-h-full flex-col">
       <SiteHeader />
@@ -24,12 +28,11 @@ export default function VetrinaPage() {
             Prodotti in negozio
           </h1>
           <p className="mt-4 max-w-2xl text-zinc-300">
-            {VETRINA_PRODUCTS.length} articoli fotografati. Non c&apos;è pagamento sul sito: per
-            info e acquisto passa in sede, oppure scrivi su WhatsApp e organizzi col negozio. Il
-            numero articolo è quello della scheda: indicalo nel messaggio.
+            {products.length} articoli in vetrina. Non c&apos;è pagamento sul sito: per info e
+            acquisto passa in sede, oppure scrivi su WhatsApp e organizzi col negozio.
           </p>
           <div className="mt-10">
-            <VetrinaBrowser />
+            <VetrinaBrowser products={products} />
           </div>
         </div>
       </main>

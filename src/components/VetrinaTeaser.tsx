@@ -1,9 +1,11 @@
 import Link from "next/link";
-import { VETRINA_PRODUCTS, vetrinaLabel } from "@/config/vetrina";
+import { vetrinaLabel } from "@/lib/vetrina-product";
+import { listPublicProducts } from "@/lib/vetrina-store";
 import { Reveal } from "./Reveal";
 
-export function VetrinaTeaser() {
-  const preview = VETRINA_PRODUCTS.slice(0, 8);
+export async function VetrinaTeaser() {
+  const products = await listPublicProducts();
+  const preview = products.slice(0, 8);
 
   return (
     <section id="vetrina" className="border-y border-white/10 bg-[#0d1117] px-4 py-20 sm:px-6">
@@ -14,8 +16,8 @@ export function VetrinaTeaser() {
             I prodotti del negozio, da consultare prima di passare.
           </h2>
           <p className="mt-4 max-w-2xl text-zinc-400">
-            {VETRINA_PRODUCTS.length} articoli in foto. Sul sito non si compra: prezzo, disponibilità
-            e ritiro solo in sede, oppure si organizza su WhatsApp con il negozio.
+            {products.length} articoli in foto. Sul sito non si compra: prezzo, disponibilità e
+            ritiro solo in sede, oppure si organizza su WhatsApp con il negozio.
           </p>
         </Reveal>
 
@@ -27,17 +29,24 @@ export function VetrinaTeaser() {
                 className="block overflow-hidden rounded-2xl border border-white/10 bg-white/[0.03] transition hover:border-[#1565c0]/50"
               >
                 <span className="flex aspect-square items-center justify-center bg-white">
-                  {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img
-                    src={product.images[0]}
-                    alt={`${vetrinaLabel(product.code)} in vetrina`}
-                    loading="lazy"
-                    decoding="async"
-                    className="h-full w-full object-contain p-2"
-                  />
+                  {product.images[0] ? (
+                    // eslint-disable-next-line @next/next/no-img-element
+                    <img
+                      src={product.images[0]}
+                      alt={`${vetrinaLabel(product)} in vetrina`}
+                      loading="lazy"
+                      decoding="async"
+                      className="h-full w-full object-contain p-2"
+                    />
+                  ) : (
+                    <span className="text-xs text-zinc-500">Senza foto</span>
+                  )}
                 </span>
                 <span className="block px-3 py-3 text-sm font-semibold text-white">
-                  {vetrinaLabel(product.code)}
+                  {vetrinaLabel(product)}
+                  {product.price ? (
+                    <span className="mt-1 block text-xs font-medium text-[#90caf9]">{product.price}</span>
+                  ) : null}
                 </span>
               </Link>
             </li>
